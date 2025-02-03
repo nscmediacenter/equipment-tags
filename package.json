@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "deploy": "gh-pages -d public",
+    "deploy": "gh-pages -d public -b gh-pages",
     "start": "sirv public --no-clear"
   },
   "devDependencies": {
