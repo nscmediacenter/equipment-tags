@@ -209,12 +209,16 @@
 		let currentName = "";
 		let currentOwner = "";
 		for (const line of advancedInput.split("\n")) {
-			if (line.startsWith("N:")) {
-				currentName = line.slice(2);
-			} else if (line.startsWith("O:")) {
-				currentOwner = line.slice(2);
+			const stripped = line.trim();
+			if (stripped.startsWith("N:")) {
+				currentName = stripped.slice(2);
+			} else if (stripped.startsWith("O:")) {
+				currentOwner = stripped.slice(2);
 			} else {
-				items = [...items, {name: currentName, owner: currentOwner, barcode: line}];
+				const numericOnly = stripped.replace(/[^0-9]/g, '');
+				if (numericOnly.length > 0 && !isNaN(numericOnly)) {
+					items = [...items, {name: currentName, owner: currentOwner, barcode: numericOnly}];
+				}
 			}
 		}
 		saveItemList();
